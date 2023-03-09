@@ -64,3 +64,13 @@ async def update_user(user_update: UserUpdateRequest, user_id: UUID):
         status_code= 404,
         detail=f"user with id: {user_id} does not exist"
     )
+
+@app.get("/api/v1/users/{user_id}")
+async def get_user(user_id: UUID):
+    for user in db :
+        if user.id == user_id:
+            return[user]
+    raise HTTPException( 
+        status_code= 404,
+        detail=f"user with id: {user_id} does not exist"
+    )
